@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <title>DloHaiti - Map Report</title>
+    <script src="Scripts/jquery-3.2.1.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places&ext=.js&key=AIzaSyDDU8G2YqxKA9GByUS0WV406Fw0rwGeOAU"></script>
+    <script src="https://cdn.rawgit.com/googlemaps/v3-utility-library/master/infobox/src/infobox.js?key=AIzaSyDDU8G2YqxKA9GByUS0WV406Fw0rwGeOAU"></script>
+    <script src="Scripts/MapScript.js"></script>
+    <!--<script src="Scripts/LoadJson.js"></script>-->
+
+    <link href="Styles/MapStyles.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="map"></div>
+    <!--<script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDU8G2YqxKA9GByUS0WV406Fw0rwGeOAU&callback=initMap">
+    </script>-->
+    <script>
+        google.maps.event.addDomListener(window, "load", initMap);
+    </script>
+</body>
+</html>
