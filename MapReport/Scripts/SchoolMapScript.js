@@ -20,7 +20,7 @@ function initMap() {
 function getData() {
     $.ajax({
         type: "GET",
-        url: "/Data/SchoolData.php",
+        url: "Data/SchoolData.php",
         contentType: "application/json; charset=ISO-8859-1",
         dataType: "text",
         success: function (data) {
