@@ -1,26 +1,9 @@
-<?php include 'Database.php';?>
-
-<?php
+<?php include 'Database.php';
 
 function getNoOfWorkingDays($startDate, $endDate) {
     $result = executeStmt("SELECT NoOfWorkingDays(STR_TO_DATE('" . $startDate . "', '%d-%m-%Y'), STR_TO_DATE('" . $endDate . "', '%d-%m-%Y')) AS WorkingDays");
 
     return count($result) > 0 ? $result[0]["WorkingDays"] : 0;
-}
-
-function getJsonFromQuery($query) {
-    $result = executeStmt($query);
-
-    for ($i = 0; $i < count($result); $i++)
-    {
-         $result[$i]['Name'] = iconv(mb_detect_encoding($result[$i]['Name'], mb_detect_order(), true), "UTF-8", $result[$i]['Name']);
-    }
-
-    json_encode($result, JSON_UNESCAPED_UNICODE);
-}
-
-function toDate($dateString){
-    return " STR_TO_DATE('" . $dateString . "', '%d-%m-%Y') ";
 }
 
 function getSchoolJsonData() {
