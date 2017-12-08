@@ -1,7 +1,6 @@
 <?php
 
 function executeStmt($sqlStatement) {
-
     try
     {
         $username="app";
@@ -9,7 +8,7 @@ function executeStmt($sqlStatement) {
         $dbname="dlo";
         $servername="104.131.40.239";
 
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $stmt = $conn->prepare($sqlStatement);
         $stmt->execute();
@@ -23,9 +22,4 @@ function executeStmt($sqlStatement) {
         die();
     }
 }
-
-
-
-
-
 ?>

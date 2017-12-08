@@ -1,7 +1,11 @@
 ﻿var Objects = [];
 var map = null;
 var radiusMultiplier = 2;
-    var latLng = { lat: 19.042832, lng: -72.8436973 };
+var latLng = { lat: 19.042832, lng: -72.8436973 };
+
+String.prototype.capitalize = function(lower) {
+	return (lower ? this.toLowerCase() : this).replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+};
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -10,40 +14,19 @@ function initMap() {
         center: latLng,//{ lat: 37.090, lng: -95.712 },
         mapTypeId: 'roadmap'  // roadmap,satellite,hybrid,terrain
     });
-    //$.getJSON("Data/SchoolData.json", loadMapData);
-
-    //var infowindow = new google.maps.InfoWindow({
-    //    content: 'This is just a info box.'
-    //});
-    // http://maps.google.com/mapfiles/ms/icons/green.png
-    // http://maps.google.com/mapfiles/ms/icons/green-dot.png
-    // http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=S|6677ff|ffffff
-
-    //var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
-    //var marker = new google.maps.Marker({
-    //    position: latLng,
-    //    map: map,
-    //    title: 'Hello World!'
-    //});
-
-    //marker.addListener('click', function () {
-    //    infowindow.open(map, marker);
-    //});
-
     getData();
 }
 
 function getData() {
     $.ajax({
         type: "GET",
-        url: "Data/SchoolData.txt",
-        contentType: "application/json; charset=ISO-8859-1", //"application/json; charset=utf-8",
-        //characterEncoding: "ISO-8859-1",
+        url: "Data/SchoolData.php",
+        contentType: "application/json; charset=ISO-8859-1",
         dataType: "text",
         success: function (data) {
-            var jsonData = JSON.parse(data);
-            jsonData = convertToIntAndGetNotNulls(jsonData);
-            loadMapData(jsonData);
+					var jsonData = JSON.parse(data);
+					loadMapData(jsonData);
+					$('.overlay').fadeOut();
         },
         error: function (xhr, textStatus, errorThrown) {
             alert(textStatus + '; ' + xhr.responseText);
@@ -51,35 +34,12 @@ function getData() {
     });
 }
 
-
 function loadMapData(schools) {
-    $.each(schools, function (idx, school) {
-        //addCircleToMap(school);
-        //if (idx == 0) {}
-            addMarker(school);
-        
-    });
-}
-
-
-
-function convertToIntAndGetNotNulls(data) {
-    var temp = [];
-
-    $.each(data, function (idx, school) {
-        school.NoOfStudents = getRandom();
-        school.lat = parseInt(school.lat);
-        school.lng = parseInt(school.lng);
-        school.SchoolName = school.SchoolName;
-        temp.push(school);
-    });
-    return temp;
-}
-
-
-function getRandom() {
-    var num = Math.floor(Math.random() * 900) + 0;// 0 -> 1
-    return num;
+	schools.forEach(function (school) {
+		if (school.Gallons) {
+			addMarker(school);
+		}
+	});
 }
 
 function addCircleToMap(school) {
@@ -176,47 +136,29 @@ function generateCircleContent(school) {
 }
 
 function addMarker(school) {
-    //var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
-    //var infowindow = new google.maps.InfoWindow({
-    //    content: generateInfoWindowContent(school)
-    //});
-    //var marker = new google.maps.Marker({
-    //    position: school.LatLng,
-    //    map: map,
-    //    title: school.school,
-    //    icon: new google.maps.MarkerImage("http://maps.google.com/mapfiles/ms/icons/yellow-dot.png"),
-    //});
-
-    //marker.addListener('click', function () {
-    //    infowindow.open(map, marker);
-    //});
-
-    //    var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
-
     var image = 'images/marker.png';
 
     var infowindow = new google.maps.InfoWindow({
-        content: generateInfoWindowContent(school) //'This is just a info box.'
+			content: generateInfoWindowContent(school) //'This is just a info box.'
     });
 
-
     var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(school.Lat, school.Lng),  // latLng,
-        map: map,
-        title: school.SchoolName,
-        icon: image //getMarkerImage(school)
+			position: new google.maps.LatLng(school.Lat, school.Lng),  // latLng,
+			map: map,
+			title: school.SchoolName.capitalize(),
+			icon: image //getMarkerImage(school)
     });
 
     marker.addListener('click', function () {
-        infowindow.open(map, marker);
+			infowindow.open(map, marker);
     });
-
 }
 function generateInfoWindowContent(school) {
     return '<div>' +
-                '<h2>' + school.SchoolName + '</h2>' +
-                'Number of Students: ' + school.NoOfStudents + '<br/>' +
-                'Average Daily Gallons Delivered: ' + school.Gallons + '' + 
+                '<h2>' + school.SchoolName.capitalize()+ '</h2>' +
+                'Number of Students: ' + school.NoOfStudents + '<br>' +
+		'Average Daily Gallons Delivered: ' + school.Gallons + '' + '<br>' +
+		'What3Words Location: <a target="_blank" href="https://map.what3words.com/' + school.what3words + '">' + school.what3words + '</a>' + 
             '</div>';
 }
 
