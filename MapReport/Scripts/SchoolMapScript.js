@@ -20,7 +20,7 @@ function initMap() {
 function getData() {
     $.ajax({
         type: "GET",
-        url: "Data/SchoolData.php",
+        url: "/Data/SchoolData.php",
         contentType: "application/json; charset=ISO-8859-1",
         dataType: "text",
         success: function (data) {
@@ -145,7 +145,7 @@ function addMarker(school) {
     var marker = new google.maps.Marker({
 			position: new google.maps.LatLng(school.Lat, school.Lng),  // latLng,
 			map: map,
-			title: school.SchoolName.capitalize(),
+			title: school.SchoolName.capitalize(true),
 			icon: image //getMarkerImage(school)
     });
 
@@ -155,7 +155,7 @@ function addMarker(school) {
 }
 function generateInfoWindowContent(school) {
     return '<div>' +
-                '<h2>' + school.SchoolName.capitalize()+ '</h2>' +
+                '<h2>' + school.SchoolName.capitalize(true)+ '</h2>' +
                 'Number of Students: ' + school.NoOfStudents + '<br>' +
 		'Average Daily Gallons Delivered: ' + school.Gallons + '' + '<br>' +
 		'What3Words Location: <a target="_blank" href="https://map.what3words.com/' + school.what3words + '">' + school.what3words + '</a>' + 
@@ -183,9 +183,3 @@ function getMarkerImage(school) {
     var fullUrl = baseUrl + '&chld=' + letter + '|' + backColor + '|' + foreColor;
     return fullUrl;
 }
-
-
-
-
-
-
