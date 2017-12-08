@@ -36,7 +36,7 @@ function getData() {
 
 function loadMapData(schools) {
 	schools.forEach(function (school) {
-		if (school.Gallons) {
+		if (school.Gallons && school.what3words) {
 			addMarker(school);
 		}
 	});
