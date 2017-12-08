@@ -28,7 +28,7 @@ function getSchoolJsonData() {
 
     $result = executeStmt($query);
 
-    return json_encode($result, JSON_UNESCAPED_UNICODE);
+    return json_encode($result);
 }
 
 ?>
