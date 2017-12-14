@@ -1,4 +1,17 @@
+SetEnvIf Request_URI ^/MapReport/schools.html noauth=1
+SetEnvIf Request_URI ^/MapReport/Scripts/* noauth=1
+SetEnvIf Request_URI ^/MapReport/Styles/* noauth=1
+SetEnvIf Request_URI ^/MapReport/Data/SchoolData.php noauth=1
+SetEnvIf Request_URI ^/favicon.ico noauth=1
+SetEnvIf Request_URI ^/MapReport/images/* noauth=1
+
 AuthName "Restricted Area"
 AuthType Basic
 AuthUserFile /var/www/.htpasswd
 require valid-user
+
+Order Deny,Allow
+Satisfy any
+Deny from all
+Require valid-user
+Allow from env=noauth
