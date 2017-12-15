@@ -37,7 +37,7 @@
 </head>
 <body>
     <?php
-    $myRoot = $_SERVER["DOCUMENT_ROOT"] . '/MapReport';
+    $myRoot = getcwd();
     include $myRoot . '/Data/options.php';
     include $myRoot . '/Data/Database.php';
 
