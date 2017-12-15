@@ -20,7 +20,7 @@ function initMap() {
 function getData() {
     $.ajax({
         type: "GET",
-        url: "/Data/SchoolData.php",
+        url: "Data/SchoolData.php",
         contentType: "application/json; charset=ISO-8859-1",
         dataType: "text",
         success: function (data) {
@@ -36,7 +36,7 @@ function getData() {
 
 function loadMapData(schools) {
 	schools.forEach(function (school) {
-		if (school.Gallons) {
+		if (school.Gallons && school.what3words) {
 			addMarker(school);
 		}
 	});
