@@ -50,15 +50,6 @@
     ?>
     <div class="content">
         <div class="row">
-            <div class='col-sm-1'>Period 1:</div>
-            <div class='col-sm-3'>
-                <div id="datePeriod1" class="selectbox pull-left">
-                    <i class="glyphicon glyphicon-calendar"></i>
-                    <span></span>
-                    <b class="caret"></b>
-                </div>
-            </div>
-            <div class='col-sm-1'></div>
             <div class='col-sm-1'>Kiosk:</div>
             <div class='col-sm-2'>
                 <?php echo generateSelect('selKiosks', true, getKioskOptions()); ?>
@@ -67,38 +58,6 @@
             <div class='col-sm-1'>Show Top:</div>
             <div class='col-sm-2'>
                 <?php echo generateSelect('selShowTop', false, getOptionsFromList(array(5, 10, 15, 20, 25, 30, 35, 40, 45, 50)));?>
-            </div>
-        </div>
-        <div class="row">
-            <div class='col-sm-1'>Period 2:</div>
-            <div class='col-sm-3'>
-                <div id="datePeriod2" class="selectbox pull-left">
-                    <i class="glyphicon glyphicon-calendar"></i>
-                    <span></span>
-                    <b class="caret"></b>
-                </div>
-            </div>
-
-            <div class='col-sm-1'></div>
-            <div class='col-sm-1'>Channels:</div>
-            <div class='col-sm-2'>
-                <?php echo generateSelect('selChennel', true, getChannelOptions());?>
-            </div>
-            <div class='col-sm-1'></div>
-            <div class='col-sm-1'><input type='button' id='btnShow' value='Show' class='btn btn-primary' /></div>
-            <div class='col-sm-2'>
-                <!--<select id="selRadius">
-                    <option>2</option>
-                    <option>3</option>
-                    <option>5</option>
-                    <option>10</option>
-                    <option>20</option>
-                    <option>30</option>
-                </select>-->
-                <div id="slider">
-                    <div id="sliderValue" class="ui-slider-handle"></div>
-                </div>
-
             </div>
         </div>
     </div>
