@@ -4,6 +4,19 @@ body {
 	padding: 0px;
 }
 
+.content {
+	background: #E5E3DF;
+	padding: 10px;
+	position: absolute;
+	top: 0;
+	z-index: 100000000;
+	width: 100%;
+}
+
+.content .option-label {
+	padding-top: 7px;
+}
+
 .selectbox {
 	background: #fff;
 	color: #333;
