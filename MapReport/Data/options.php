@@ -50,15 +50,15 @@ function getYearOptions() {
     $result = executeStmt("Select DISTINCT EXTRACT(YEAR FROM created_date) AS Yr from receipt ORDER BY Yr DESC");
     return generateOptions($result, 'Yr');
 }
+
 function getKioskOptions() {
     $result = executeStmt("select id, name from kiosk");
     return generateOptionsWithValues($result, 'name', 'id');
 }
+
 function getChannelOptions() {
     $result = executeStmt("select id, name from sales_channel");
     return generateOptionsWithValues($result, 'name', 'id');
 }
-
-
 
 ?>

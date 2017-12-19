@@ -9,8 +9,12 @@ body {
 	padding: 10px;
 	position: absolute;
 	top: 0;
-	z-index: 100000000;
+	z-index: 1000;
 	width: 100%;
+}
+
+.daterangepicker {
+	z-index: 10000;
 }
 
 .content .option-label {
@@ -25,6 +29,7 @@ body {
 	border-radius: 4px;
 	border-width: 0 1px 4px;
 	cursor: pointer;
+	display: inline-block;
 }
 /*#realtime thead th, #timeline .timeline-icon, #users th, .clickable-rows td, .delete-link, .ovtab, .selectbox {
 
