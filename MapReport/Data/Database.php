@@ -21,6 +21,4 @@ function executeStmt($sqlStatement) {
         die();
     }
 }
-
-echo json_encode(['testing']);
 ?>
