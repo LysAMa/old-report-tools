@@ -75,6 +75,7 @@ function reloadMapWithData() {
 
 	clearMap();
 	$('.overlay').fadeIn();
+	console.log(url);
 	getData(url);
 }
 

@@ -29,7 +29,7 @@ function getData(url) {
 					$('.overlay').fadeOut();
         },
         error: function (xhr, textStatus, errorThrown) {
-            console.log(`${errorThrown}`);
+            console.log(`${JSON.stringify(xhr, null, 4)}`);
         }
     });
 }
