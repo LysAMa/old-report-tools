@@ -49,7 +49,7 @@
     <div class="content">
         <div class="row">
             <div class='col-sm-3'>
-				<label for="datePeriod">Period: </label>
+				<label for="datePeriod">Period:</label>
                 <div id="datePeriod" class="selectbox">
                     <i class="glyphicon glyphicon-calendar"></i>
                     <span></span>

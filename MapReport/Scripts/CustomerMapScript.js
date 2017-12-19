@@ -25,12 +25,11 @@ function getData(url) {
         dataType: "text",
         success: function (data) {
 					var jsonData = JSON.parse(data);
-					console.log(JSON.stringify(jsonData, null, 4));
 					loadMapData(jsonData);
 					$('.overlay').fadeOut();
         },
         error: function (xhr, textStatus, errorThrown) {
-            console.log(`${JSON.stringify(xhr, null, 4)} and ${errorThrown}`);
+            console.log(`${errorThrown}`);
         }
     });
 }
