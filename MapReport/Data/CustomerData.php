@@ -1,6 +1,6 @@
 <?php
 
-include 'Database.php';
+/* include 'Database.php'; */
 
 $kiosks = isset($_GET["kiosks"]) ? $_GET["kiosks"] : '';
 $showTop = isset($_GET["showTop"]) ? $_GET["showTop"] : '';
