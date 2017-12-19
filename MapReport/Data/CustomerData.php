@@ -7,7 +7,7 @@ $showTop = isset($_GET["showTop"]) ? $_GET["showTop"] : '';
 $startDatePeriod = isset($_GET["startP"]) ? $_GET["startP"] : '';
 $endDatePeriod = isset($_GET["endP"]) ? $_GET["endP"] : '';
 
-echo json_encode(['lmao']);
+echo json_encode(['Test 2']);
 exit();
 
 if(empty($startDatePeriod) || empty($endDatePeriod) || empty($kiosks)) {
