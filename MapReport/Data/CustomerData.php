@@ -14,7 +14,7 @@ if(empty($startDatePeriod) || empty($endDatePeriod) || empty($kiosks)) {
 
 $query = "SELECT
 			contact_name as customerName,
-			GetAverageGallonsTmp(customer_account.id, ". toDate($startDatePeriod) .", ". toDate($endDatePeriod) .") AS Gallons,
+			GetAverageGallonsTmp(customer_account.id, STR_TO_DATE('". $startDatePeriod ."', '%d-%m-%Y'), STR_TO_DATE('". $endDatePeriod ."', '%d-%m-%Y')) AS Gallons,
 			CASE
 				WHEN gps_coordinates like '% %' AND length(gps_coordinates) > 1
 					Then LEFT(customer_account.gps_coordinates, locate(' ',customer_account.gps_coordinates) - 1)
@@ -26,15 +26,14 @@ $query = "SELECT
 					Then TRIM(SUBSTRING(customer_account.gps_coordinates, locate(' ',customer_account.gps_coordinates) + 1))
 				WHEN gps_coordinates like '%,%' AND length(gps_coordinates) > 1
 					Then TRIM(SUBSTRING(customer_account.gps_coordinates, locate(',',customer_account.gps_coordinates) + 1))
-			END AS Lng,
-			`what3words`,
-			FROM customer_account 
-			WHERE gps_coordinates != ''
-			ORDER BY Gallons DESC,
-			LIMIT ". $showTop ."";
+			END AS Lng
+			FROM customer_account
+			WHERE gps_coordinates != '' AND kiosk_id IN (". $kiosks .")
+			ORDER BY Gallons DESC
+			LIMIT ". $showTop .";";
 
 $result = executeStmt($query);
 
-echo $result;
+echo json_encode($result);
 
 ?>

@@ -34,6 +34,13 @@
 
 </head>
 <body>
+	<div class="overlay">
+		<div>
+			<img src="images/dlo-haiti-logo.gif">
+			<p>Loading Data...</p>
+		</div>
+	</div>
+
     <?php
     $myRoot = getcwd();
     include $myRoot . '/Data/options.php';

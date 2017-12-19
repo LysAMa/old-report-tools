@@ -2,6 +2,7 @@
 var map = null;
 var radiusMultiplier = 2;
 var latLng = { lat: 19.042832, lng: -72.8436973 };
+var markersArray = [];
 
 String.prototype.capitalize = function(lower) {
 	return (lower ? this.toLowerCase() : this).replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
@@ -14,7 +15,6 @@ function initMap() {
         center: latLng,//{ lat: 37.090, lng: -95.712 },
         mapTypeId: 'roadmap'  // roadmap,satellite,hybrid,terrain
     });
-    // getData();
 }
 
 function getData(url) {
@@ -26,20 +26,18 @@ function getData(url) {
         success: function (data) {
 					var jsonData = JSON.parse(data);
 					console.log(JSON.stringify(jsonData, null, 4));
-					// loadMapData(jsonData);
+					loadMapData(jsonData);
 					$('.overlay').fadeOut();
         },
         error: function (xhr, textStatus, errorThrown) {
-            alert(`${JSON.stringify(xhr, null, 4)} and ${errorThrown}`);
+            console.log(`${JSON.stringify(xhr, null, 4)} and ${errorThrown}`);
         }
     });
 }
 
 function loadMapData(customers) {
 	customers.forEach(function (customer) {
-		if (customer.Gallons && customer.what3words) {
-			addMarker(customer);
-		}
+		addMarker(customer);
 	});
 }
 
@@ -154,15 +152,15 @@ function addMarker(customer) {
     marker.addListener('click', function () {
 			infowindow.open(map, marker);
     });
+
+		markersArray.push(marker);
 }
 
 function generateInfoWindowContent(customer) {
-    return '<div>' +
-                '<h2>' + customer.customerName.capitalize(true)+ '</h2>' +
-                'Number of Students: ' + customer.NoOfStudents + '<br>' +
-		'Average Daily Gallons Delivered: ' + customer.Gallons + '' + '<br>' +
-		'What3Words Location: <a target="_blank" href="https://map.what3words.com/' + customer.what3words + '">' + customer.what3words + '</a>' + 
-            '</div>';
+    return `<div>
+           		<h2>${customer.customerName.capitalize(true)}</h2>
+							Average Daily Gallons Delivered in That Period: ${customer.Gallons || 0}<br>
+            </div>`;
 }
 
 function getMarkerImage(customer) {
@@ -185,4 +183,12 @@ function getMarkerImage(customer) {
     var letter = customer.customerName.length > 0 ? customer.customerName.slice(0, 1).toUpperCase() : '';
     var fullUrl = baseUrl + '&chld=' + letter + '|' + backColor + '|' + foreColor;
     return fullUrl;
+}
+
+function clearMap() {
+	markersArray.forEach(function (marker) {
+		marker.setMap(null);
+	});
+
+	markersArray.length = 0;
 }

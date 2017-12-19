@@ -1,5 +1,4 @@
 <?php
-
 function executeStmt($sqlStatement) {
     try
     {
